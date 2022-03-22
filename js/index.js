@@ -34,14 +34,30 @@ function calculateAll() {
 // ITERATION 4
 
 function removeProduct(event) {
+  //... your code goes here
   const target = event.currentTarget;
   console.log('The target in remove is:', target);
-  //... your code goes here
+  // target = button, parentNode es el td, para remover fila hay que acceder al parentNode del td
+  target.parentNode.parentNode.remove();
 }
 
 // ITERATION 5
 
 function createProduct() {
+  const button = document.querySelector('#create');
+  button.addEventListener('click', (event) => {
+    const nameInput = document.querySelector('.enter-name');
+    const priceInput = document.querySelector('.enter-price');
+    if (nameInput.value && priceInput.value) {
+      const newProduct = {
+        name: nameInput.value,
+        price: priceInput.value
+      };
+      const newInput = document.querySelector('.create-product');
+      const newArr = [...newInput];
+      newArr.push(newProduct);
+    }
+  });
   //... your code goes here
 }
 
@@ -51,4 +67,9 @@ window.addEventListener('load', () => {
   calculatePricesBtn.addEventListener('click', calculateAll);
   console.log(`hola`, calculatePricesBtn);
   //... your code goes here
+
+  const removeButtons = document.querySelectorAll('.btn-remove');
+  removeButtons.forEach((butt) => {
+    butt.addEventListener('click', removeProduct);
+  });
 });
