@@ -44,20 +44,19 @@ function removeProduct(event) {
 // ITERATION 5
 
 function createProduct() {
-  const button = document.querySelector('#create');
-  button.addEventListener('click', (event) => {
-    const nameInput = document.querySelector('.enter-name');
-    const priceInput = document.querySelector('.enter-price');
-    if (nameInput.value && priceInput.value) {
-      const newProduct = {
-        name: nameInput.value,
-        price: priceInput.value
-      };
-      const newInput = document.querySelector('.create-product');
-      const newArr = [...newInput];
-      newArr.push(newProduct);
-    }
-  });
+  const tbody = document.querySelector('tbody');
+  const template = document.getElementById('template');
+  const clone = document.importNode(template.content, true);
+  const name = document.querySelector('.create-product > td input');
+  const price = document.querySelector(
+    '.create-product td:nth-of-type(2) input'
+  );
+  clone.querySelector('.name span').textContent = name.value;
+  clone.querySelector('.price span').textContent = price.value;
+  clone.querySelector('.btn-remove').addEventListener('click', removeProduct);
+  name.value = '';
+  price.value = '';
+  tbody.append(clone);
   //... your code goes here
 }
 
